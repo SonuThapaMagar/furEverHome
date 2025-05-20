@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
-import Navbar from "../../components/Navbar"
-import "../../styles/login.css"
-import img from  "../../images/login.png"
+import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import "../../styles/login.css";
+import img from "../../images/login.png";
 
 function Login() {
   return (
@@ -10,21 +10,36 @@ function Login() {
 
       <main className="main-content">
         <div className="illustration-container">
-          <img src={img} alt="Pet care illustration" className="pet-illustration" />
+          <img
+            src={img}
+            alt="Pet care illustration"
+            className="pet-illustration"
+          />
         </div>
 
         <div className="form-container">
           <div className="form-card">
-            <h2 className="form-title">Sign In</h2>
+            <h4 className="title">FurEverHome</h4>
+            <h2 className="form-title">Login</h2>
             <form className="login-form">
               <div className="form-group">
                 <label htmlFor="email">Email*</label>
-                <input type="email" id="email" placeholder="Enter Your Email" required />
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter Your Email"
+                  required
+                />
               </div>
 
               <div className="form-group">
                 <label htmlFor="password">Password*</label>
-                <input type="password" id="password" placeholder="Enter Your Password" required />
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter Your Password"
+                  required
+                />
               </div>
 
               <div className="forgot-password">
@@ -48,7 +63,7 @@ function Login() {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
