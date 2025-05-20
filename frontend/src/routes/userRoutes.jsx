@@ -1,12 +1,23 @@
 import { Routes, Route } from "react-router-dom";
-import UserLogin from "../pages/auth/UserLogin";
 import { LandingPage } from "../pages/LandingPage";
+import Signup from "../pages/auth/signup";
+import Login from "../pages/auth/login";
+import Dashboard from "../pages/user/Dashboard";
+import AdminLogin from "../pages/auth/adminLogin";
 
-export default function UserRoutes() {
+function UserRoutes() {
   return (
     <Routes>
+      {/* User Routes */}
       <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<UserLogin />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+
+      {/* Admin Routes */}
+      <Route path="/superadmin/login" element={<AdminLogin />} />
     </Routes>
   );
 }
+
+export default UserRoutes;

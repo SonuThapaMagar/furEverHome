@@ -1,9 +1,78 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import "../../styles/login.css";
 import img from "../../images/login.png";
+import { useState } from "react";
 
 function Login() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [userId, setUserId] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setUserId("");
+
+    console.log("Login form submitted with data:", formData);
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (!response.ok) {
+        const rawResponse = await response.text();
+        console.log("Raw server response:", rawResponse);
+        let errorMessage;
+        if (rawResponse) {
+          try {
+            const errorData = JSON.parse(rawResponse);
+            errorMessage =
+              errorData.message ||
+              `Login failed: ${response.status} ${response.statusText}`;
+          } catch (jsonError) {
+            console.error("Failed to parse JSON response:", jsonError);
+            errorMessage = `Login failed: ${response.status} ${response.statusText}`;
+          }
+        } else {
+          errorMessage = `Login failed: ${response.status} ${response.statusText}`;
+        }
+        setError(errorMessage);
+        console.error("Login failed:", errorMessage);
+        return;
+      }
+
+      const data = await response.json();
+      setSuccess(data.message || "Login successful!");
+      setUserId(data.userId || "");
+      console.log("User ID (UUID):", data.userId);
+      setTimeout(() => navigate("/dashboard"), 2000);
+    } catch (error) {
+      setError(error.message || "An error occurred during login");
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="page-container">
       <Navbar />
