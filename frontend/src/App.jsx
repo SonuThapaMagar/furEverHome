@@ -1,8 +1,8 @@
-import UserRoutes from './routes/UserRoutes';
+import AppRoutes from "./routes/userRoutes";
 import "./styles/global.css"
 
 function App() {
-  return <UserRoutes />;
+  return <AppRoutes />;
 }
 
 export default App;

@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
 import "../../styles/signup.css";
 import img2 from "../../images/login.png";
 import { useState } from "react";

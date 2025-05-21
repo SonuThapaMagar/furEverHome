@@ -4,6 +4,7 @@ import Signup from "../pages/auth/signup";
 import Login from "../pages/auth/login";
 import Dashboard from "../pages/user/Dashboard";
 import AdminLogin from "../pages/auth/adminLogin";
+import SuperadminDashboard from "../pages/superadmin/pages/SuperadminDashboard";
 
 function UserRoutes() {
   return (
@@ -16,6 +17,7 @@ function UserRoutes() {
 
       {/* Admin Routes */}
       <Route path="/superadmin/login" element={<AdminLogin />} />
+      <Route path="/superadmin/dashboard" element={<SuperadminDashboard />} />
     </Routes>
   );
 }
