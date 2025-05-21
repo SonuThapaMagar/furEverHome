@@ -53,7 +53,7 @@ const menuItems = [
     },
 ];
 
-const SuperadminLayout = () => {
+const SuperadminLayout = (props) => {
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -101,7 +101,7 @@ const SuperadminLayout = () => {
         `}</style>
             </Sider>
             <Layout>
-                <Header style={{ padding: 0, background: colorBgContainer }}>
+                <Header style={{ padding: 0, background: colorBgContainer }} >
                     <Button
                         type="text"
                         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -112,80 +112,20 @@ const SuperadminLayout = () => {
                             height: 64,
                             fontFamily: 'Poppins, sans-serif',
                         }}
+
                     />
                 </Header>
                 <Content
                     style={{
                         margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
+                        padding: 4,
+                        minHeight: 480,
                         background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                         fontFamily: 'Poppins, sans-serif',
                     }}
                 >
-                    <div
-                        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
-                        style={{ fontFamily: 'Poppins, sans-serif' }}
-                    >
-                        <Card
-                            className="shadow"
-                            style={{
-                                background: '#e3eafe',
-                                borderRadius: 16,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                minHeight: 160,
-                            }}
-                            bodyStyle={{ padding: 24, width: '100%' }}
-                        >
-                            <div className="flex flex-col items-center justify-center">
-                                <UserOutlined style={{ fontSize: 36, color: '#757FF6', marginBottom: 8 }} />
-                                <div className="text-lg font-medium mb-1" style={{ color: '#757FF6' }}>Total Users</div>
-                                <div className="text-3xl font-bold" style={{ color: '#222' }}>789</div>
-                            </div>
-                        </Card>
-                        <Card
-                            className="shadow"
-                            style={{
-                                background: '#ffe7e7',
-                                borderRadius: 16,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                minHeight: 160,
-                            }}
-                            bodyStyle={{ padding: 24, width: '100%' }}
-                        >
-                            <div className="flex flex-col items-center justify-center">
-                                <AppstoreOutlined style={{ fontSize: 36, color: '#ff7f7f', marginBottom: 8 }} />
-                                <div className="text-lg font-medium mb-1" style={{ color: '#ff7f7f' }}>Total Animals</div>
-                                <div className="text-3xl font-bold" style={{ color: '#222' }}>120</div>
-                            </div>
-                        </Card>
-                        <Card
-                            className="shadow"
-                            style={{
-                                background: '#e7fbe7',
-                                borderRadius: 16,
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                minHeight: 160,
-                            }}
-                            bodyStyle={{ padding: 24, width: '100%' }}
-                        >
-                            <div className="flex flex-col items-center justify-center">
-                                <SolutionOutlined style={{ fontSize: 36, color: '#4bb543', marginBottom: 8 }} />
-                                <div className="text-lg font-medium mb-1" style={{ color: '#4bb543' }}>Total Adoption</div>
-                                <div className="text-3xl font-bold" style={{ color: '#222' }}>4</div>
-                            </div>
-                        </Card>
-                    </div>
+                    {props.children}
                 </Content>
             </Layout>
         </Layout>
