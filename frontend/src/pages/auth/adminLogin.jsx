@@ -1,16 +1,38 @@
-import { Button, Checkbox, Form, Input, Card, Typography } from "antd";
+import { Button, Form, Input, Card, Typography, message } from "antd";
 import bgImage from "../../assets/bg.png";
 import "../../styles/adminLogin.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const { Title } = Typography;
 
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 const AdminLogin = () => {
+  const navigate = useNavigate();
+
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/auth/superadmin/login', {
+        username: values.username,
+        password: values.password
+      });
+
+      if (response.data.success) {
+        // Store the token in localStorage
+        localStorage.setItem('superadminToken', response.data.token);
+        message.success('Login successful!');
+        navigate('/superadmin/dashboard');
+      }
+    } catch (error) {
+      message.error('Invalid credentials or server error');
+      console.error('Login error:', error);
+    }
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+    message.error('Please check your credentials');
+  };
+
   return (
     <div
       className="login-container"
@@ -45,9 +67,9 @@ const AdminLogin = () => {
         >
           <div style={{ textAlign: "center", marginBottom: "32px" }}>
             <Title level={3} style={{ color: "#7d8ff5", marginBottom: "8px" }}>
-              Welcome Back
+              Superadmin Login
             </Title>
-            <p style={{ color: "#666" }}>Sign in to your admin account</p>
+            <p style={{ color: "#666" }}>Sign in to your superadmin account</p>
           </div>
 
           <Form
@@ -99,8 +121,8 @@ const AdminLogin = () => {
                   borderRadius: "6px",
                   fontWeight: 500,
                   fontSize: "16px",
-                  backgroundColor:"#7d8ff5",
-                  color:"white",
+                  backgroundColor: "#7d8ff5",
+                  color: "white",
                 }}
               >
                 Sign In
